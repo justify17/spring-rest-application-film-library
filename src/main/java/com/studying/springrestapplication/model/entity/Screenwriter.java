@@ -1,9 +1,15 @@
 package com.studying.springrestapplication.model.entity;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
-public class Screenwriter {
-    private String firstName;
-    private String lastName;
+import javax.persistence.*;
+
+@NoArgsConstructor
+@Entity
+@Table(name = "screenwriters")
+public class Screenwriter extends FilmCrewMember {
+
+    public Screenwriter(String firstName, String lastName) {
+        super(firstName, lastName);
+    }
 }

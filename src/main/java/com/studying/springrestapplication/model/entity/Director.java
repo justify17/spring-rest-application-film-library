@@ -1,9 +1,15 @@
 package com.studying.springrestapplication.model.entity;
 
-import lombok.Data;
+import lombok.*;
 
-@Data
-public class Director {
-    private String firstName;
-    private String lastName;
+import javax.persistence.*;
+
+@NoArgsConstructor
+@Entity
+@Table(name = "directors")
+public class Director extends FilmCrewMember {
+
+    public Director(String firstName, String lastName) {
+        super(firstName, lastName);
+    }
 }

@@ -1,9 +1,16 @@
 package com.studying.springrestapplication.model.entity;
 
-import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Data
-public class Actor {
-    private String firstName;
-    private String lastName;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@NoArgsConstructor
+@Entity
+@Table(name = "actors")
+public class Actor extends FilmCrewMember {
+
+    public Actor(String firstName, String lastName) {
+        super(firstName, lastName);
+    }
 }
