@@ -1,6 +1,6 @@
-package com.studying.springrestapplication.model.entity.enumeration.converter;
+package com.studying.springrestapplication.model.enumeration.converter;
 
-import com.studying.springrestapplication.model.entity.enumeration.Language;
+import com.studying.springrestapplication.model.enumeration.Language;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
@@ -18,7 +18,7 @@ public class LanguageConverter implements AttributeConverter<Language, String> {
         Language[] languages = Language.values();
 
         for (Language language : languages) {
-            if (language.getName().equals(name)) {
+            if (language.getName().equalsIgnoreCase(name)) {
 
                 return language;
             }

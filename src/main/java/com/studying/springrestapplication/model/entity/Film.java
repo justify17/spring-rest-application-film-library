@@ -1,8 +1,8 @@
 package com.studying.springrestapplication.model.entity;
 
-import com.studying.springrestapplication.model.entity.enumeration.Country;
-import com.studying.springrestapplication.model.entity.enumeration.Genre;
-import com.studying.springrestapplication.model.entity.enumeration.Language;
+import com.studying.springrestapplication.model.enumeration.Country;
+import com.studying.springrestapplication.model.enumeration.Genre;
+import com.studying.springrestapplication.model.enumeration.Language;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,7 +21,7 @@ public class Film {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 128, nullable = false)
+    @Column(length = 128, nullable = false, unique = true)
     private String title;
 
     @ElementCollection(fetch = FetchType.EAGER)
@@ -45,11 +45,11 @@ public class Film {
             inverseJoinColumns = @JoinColumn(name = "producer_id"))
     private Set<Producer> producers = new HashSet<>();
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "films_actors")
-    @MapKeyJoinColumn(name = "actor_id")
-    @Column(name = "personage", length = 64, nullable = false)
-    private Map<Actor, String> starring = new HashMap<>();
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinTable(joinColumns = @JoinColumn(name = "film_id"),
+            inverseJoinColumns = @JoinColumn(name = "actor_id"))
+    @MapKeyColumn(name = "character_name", length = 64)
+    private Map<String, Actor> characters = new HashMap<>();
 
     @Column(nullable = false)
     private LocalDate releaseDate;
@@ -105,12 +105,12 @@ public class Film {
         producers.remove(producer);
     }
 
-    public void addActor(Actor actor, String personage) {
-        starring.put(actor, personage);
+    public void addCharacter(String characterName, Actor actor) {
+        characters.put(characterName, actor);
     }
 
-    public void removeActor(Actor actor) {
-        starring.remove(actor);
+    public void removeCharacter(String characterName) {
+        characters.remove(characterName);
     }
 
     public void addCountry(Country country) {

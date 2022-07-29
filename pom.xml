@@ -15,6 +15,9 @@
 	<description>Spring Boot REST Application</description>
 	<properties>
 		<java.version>11</java.version>
+		<version.lombok>1.18.22</version.lombok>
+		<version.mapstruct>1.4.2.Final</version.mapstruct>
+		<version.mapstruct-lombok>0.2.0</version.mapstruct-lombok>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -53,6 +56,18 @@
 			<version>1.8.2</version>
 			<scope>test</scope>
 		</dependency>
+
+		<dependency>
+			<groupId>org.mapstruct</groupId>
+			<artifactId>mapstruct</artifactId>
+			<version>${version.mapstruct}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok-mapstruct-binding</artifactId>
+			<version>${version.mapstruct-lombok}</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -67,6 +82,32 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<source>11</source>
+					<target>11</target>
+					<annotationProcessorPaths>
+						<path>
+							<groupId>org.mapstruct</groupId>
+							<artifactId>mapstruct-processor</artifactId>
+							<version>${version.mapstruct}</version>
+						</path>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+							<version>${version.lombok}</version>
+						</path>
+						<path>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok-mapstruct-binding</artifactId>
+							<version>${version.mapstruct-lombok}</version>
+						</path>
+					</annotationProcessorPaths>
 				</configuration>
 			</plugin>
 		</plugins>

@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @NoArgsConstructor
 @Entity
-@Table(name = "screenwriters")
+@Table(name = "screenwriters", uniqueConstraints = @UniqueConstraint(columnNames = {"firstName", "lastName"}))
 public class Screenwriter extends FilmCrewMember {
 
     public Screenwriter(String firstName, String lastName) {

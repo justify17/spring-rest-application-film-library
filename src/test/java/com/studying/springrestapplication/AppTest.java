@@ -17,7 +17,7 @@ class AppTest {
     @SpyBean
     private FilmRepository filmRepository;
 
-    @Test
+    /*@Test
     void test() {
         Film film = new Film();
         film.setTitle("New Film 2");
@@ -35,5 +35,5 @@ class AppTest {
     void test2(){
         List<Film> films = filmRepository.findAll();
         System.out.println();
-    }
+    }*/
 }

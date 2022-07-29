@@ -1,6 +1,6 @@
-package com.studying.springrestapplication.model.entity.enumeration.converter;
+package com.studying.springrestapplication.model.enumeration.converter;
 
-import com.studying.springrestapplication.model.entity.enumeration.Country;
+import com.studying.springrestapplication.model.enumeration.Country;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
@@ -18,7 +18,7 @@ public class CountryConverter implements AttributeConverter<Country, String> {
         Country[] countries = Country.values();
 
         for (Country country : countries) {
-            if (country.getName().equals(name)) {
+            if (country.getName().equalsIgnoreCase(name)) {
 
                 return country;
             }

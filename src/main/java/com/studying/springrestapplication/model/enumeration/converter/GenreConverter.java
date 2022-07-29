@@ -1,6 +1,6 @@
-package com.studying.springrestapplication.model.entity.enumeration.converter;
+package com.studying.springrestapplication.model.enumeration.converter;
 
-import com.studying.springrestapplication.model.entity.enumeration.Genre;
+import com.studying.springrestapplication.model.enumeration.Genre;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
@@ -18,7 +18,7 @@ public class GenreConverter implements AttributeConverter<Genre, String> {
         Genre[] genres = Genre.values();
 
         for (Genre genre : genres) {
-            if (genre.getName().equals(name)) {
+            if (genre.getName().equalsIgnoreCase(name)) {
 
                 return genre;
             }
