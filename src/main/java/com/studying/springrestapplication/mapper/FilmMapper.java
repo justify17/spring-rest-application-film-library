@@ -6,5 +6,7 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface FilmMapper {
+    FilmDto filmToFilmDto(Film film);
+
     Film filmDtoToFilm(FilmDto filmDto);
 }

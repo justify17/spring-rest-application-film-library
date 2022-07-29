@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class FilmCrewMemberDto {
+    private Long id;
     private String firstName;
     private String lastName;
 
