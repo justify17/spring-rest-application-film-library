@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ScreenwriterRepository extends JpaRepository<Screenwriter, Long> {
+    Screenwriter findByFirstNameAndLastName(String firstName, String lastName);
 }

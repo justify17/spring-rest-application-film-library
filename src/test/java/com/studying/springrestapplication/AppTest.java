@@ -2,6 +2,7 @@ package com.studying.springrestapplication;
 
 import com.studying.springrestapplication.model.entity.Director;
 import com.studying.springrestapplication.model.entity.Film;
+import com.studying.springrestapplication.model.repository.DirectorRepository;
 import com.studying.springrestapplication.model.repository.FilmRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -17,23 +18,12 @@ class AppTest {
     @SpyBean
     private FilmRepository filmRepository;
 
-    /*@Test
-    void test() {
-        Film film = new Film();
-        film.setTitle("New Film 2");
-
-        Director director = new Director("Roma","Goncharov");
-        Director director1 = new Director("Vasya","Mayorov");
-
-        film.addDirector(director);
-        film.addDirector(director1);
-
-        filmRepository.save(film);
-    }
+    @SpyBean
+    private DirectorRepository directorRepository;
 
     @Test
-    void test2(){
-        List<Film> films = filmRepository.findAll();
+    void test() {
+        Director director = directorRepository.findByFirstNameAndLastName("Roma","Goncharov");
         System.out.println();
-    }*/
+    }
 }

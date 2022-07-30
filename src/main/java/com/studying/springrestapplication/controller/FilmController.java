@@ -9,32 +9,33 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/films")
 public class FilmController {
     private final FilmService filmService;
 
-    @GetMapping(value = "/films")
+    @GetMapping
     public List<FilmDto> getFilms() {
 
         return filmService.getAllFilms();
     }
 
-    @GetMapping(value = "/films/{id}")
+    @GetMapping("/{id}")
     public FilmDto getFilm(@PathVariable Long id) {
 
         return filmService.getFilmById(id);
     }
 
-    @PostMapping(value = "/films")
+    @PostMapping
     public void createFilm(@RequestBody FilmDto filmDto) {
         filmService.saveFilm(filmDto);
     }
 
-    @PutMapping(value = "/films")
+    @PutMapping
     public void updateFilm(@RequestBody FilmDto filmDto) {
         filmService.updateFilm(filmDto);
     }
 
-    @DeleteMapping(value = "/films/{id}")
+    @DeleteMapping("/{id}")
     public void deleteFilm(@PathVariable Long id) {
         filmService.deleteFilmById(id);
     }

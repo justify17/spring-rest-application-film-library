@@ -6,7 +6,6 @@ import lombok.Getter;
 
 @AllArgsConstructor
 public enum Genre {
-    KIDS("Kids"),
     FANTASY("Fantasy"),
     ADVENTURE("Adventure"),
     ACTION("Action");
