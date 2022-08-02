@@ -16,10 +16,10 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class FilmServiceImpl implements FilmService {
-    private final FilmCrewMemberService<Actor> actorService;
-    private final FilmCrewMemberService<Director> directorService;
-    private final FilmCrewMemberService<Producer> producerService;
-    private final FilmCrewMemberService<Screenwriter> screenwriterService;
+    private final ActorService actorService;
+    private final DirectorService directorService;
+    private final ProducerService producerService;
+    private final ScreenwriterService screenwriterService;
     private final FilmRepository filmRepository;
     private final FilmMapper filmMapper;
 

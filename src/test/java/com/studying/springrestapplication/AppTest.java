@@ -1,7 +1,8 @@
 package com.studying.springrestapplication;
 
 import com.studying.springrestapplication.model.entity.Director;
-import com.studying.springrestapplication.model.repository.FilmCrewMemberRepository;
+import com.studying.springrestapplication.model.enumeration.Country;
+import com.studying.springrestapplication.model.enumeration.converter.CountryConverter;
 import com.studying.springrestapplication.model.repository.FilmRepository;
 import com.studying.springrestapplication.service.FilmCrewMemberService;
 import org.junit.jupiter.api.Test;
@@ -19,8 +20,16 @@ class AppTest {
     @SpyBean
     private FilmCrewMemberService<Director> directorService;
 
+    @SpyBean
+    private CountryConverter converter;
+
     @Test
     void test() {
-        
+        Country country = Country.NEW_ZEALAND;
+
+        String value = converter.convertToDatabaseColumn(country);
+        Country enumeration = converter.convertToEntityAttribute("Hello");
+
+        System.out.println();
     }
 }

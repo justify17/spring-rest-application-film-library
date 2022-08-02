@@ -4,10 +4,9 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public enum Genre implements AbstractEnum<String> {
-    FANTASY("Fantasy"),
-    ADVENTURE("Adventure"),
-    ACTION("Action");
+public enum Role implements AbstractEnum<String> {
+    ROLE_USER("User"),
+    ROLE_ADMIN("Admin");
 
     @JsonValue
     private final String name;
