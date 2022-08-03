@@ -5,7 +5,7 @@ import com.studying.springrestapplication.model.enumeration.Language;
 import javax.persistence.Converter;
 
 @Converter(autoApply = true)
-public class LanguageConverter extends AbstractEnumConverter<Language, String> {
+public class LanguageConverter extends DefaultEnumConverter<Language, String> {
 
     public LanguageConverter() {
         super(Language.class);

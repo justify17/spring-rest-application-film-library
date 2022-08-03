@@ -5,7 +5,7 @@ import com.studying.springrestapplication.model.enumeration.Role;
 import javax.persistence.Converter;
 
 @Converter(autoApply = true)
-public class RoleConverter extends AbstractEnumConverter<Role, String> {
+public class RoleConverter extends DefaultEnumConverter<Role, String> {
 
     public RoleConverter() {
         super(Role.class);

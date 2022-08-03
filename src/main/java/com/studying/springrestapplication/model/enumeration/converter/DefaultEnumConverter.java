@@ -1,12 +1,12 @@
 package com.studying.springrestapplication.model.enumeration.converter;
 
-import com.studying.springrestapplication.model.enumeration.AbstractEnum;
+import com.studying.springrestapplication.model.enumeration.DefaultEnum;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.AttributeConverter;
 
 @RequiredArgsConstructor
-public abstract class AbstractEnumConverter<E extends AbstractEnum<V>, V> implements AttributeConverter<E, V> {
+public abstract class DefaultEnumConverter<E extends DefaultEnum<V>, V> implements AttributeConverter<E, V> {
     private final Class<E> enumerationClass;
 
     @Override
@@ -26,6 +26,6 @@ public abstract class AbstractEnumConverter<E extends AbstractEnum<V>, V> implem
             }
         }
 
-        throw new IllegalArgumentException(String.format("Unknown %s name: %s", enumerationClass.getSimpleName(), value));
+        throw new IllegalArgumentException(String.format("Unknown %s value: %s", enumerationClass.getSimpleName(), value));
     }
 }

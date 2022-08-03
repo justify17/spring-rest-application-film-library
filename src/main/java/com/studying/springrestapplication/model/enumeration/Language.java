@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public enum Language implements AbstractEnum<String> {
+public enum Language implements DefaultEnum<String> {
     ENGLISH("EN");
 
     @JsonValue

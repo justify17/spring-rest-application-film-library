@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public enum Country implements AbstractEnum<String> {
+public enum Country implements DefaultEnum<String> {
     USA("USA"),
     NEW_ZEALAND("New Zealand");
 

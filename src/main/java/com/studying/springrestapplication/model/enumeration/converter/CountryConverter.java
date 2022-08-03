@@ -5,7 +5,7 @@ import com.studying.springrestapplication.model.enumeration.Country;
 import javax.persistence.Converter;
 
 @Converter(autoApply = true)
-public class CountryConverter extends AbstractEnumConverter<Country, String> {
+public class CountryConverter extends DefaultEnumConverter<Country, String> {
 
     public CountryConverter() {
         super(Country.class);

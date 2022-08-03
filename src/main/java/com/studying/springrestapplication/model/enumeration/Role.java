@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public enum Role implements AbstractEnum<String> {
+public enum Role implements DefaultEnum<String> {
     ROLE_USER("User"),
     ROLE_ADMIN("Admin");
 
