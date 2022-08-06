@@ -29,4 +29,5 @@ public class SecurityServiceImpl implements SecurityService {
 
         userRepository.save(user);
     }
+
 }
