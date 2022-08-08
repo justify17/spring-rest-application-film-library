@@ -2,10 +2,12 @@ package com.studying.springrestapplication.service.impl;
 
 import com.studying.springrestapplication.dto.JwtRequest;
 import com.studying.springrestapplication.dto.JwtResponse;
+import com.studying.springrestapplication.dto.RefreshJwtRequest;
 import com.studying.springrestapplication.security.jwt.JwtProvider;
 import com.studying.springrestapplication.service.AuthenticationService;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,10 +21,12 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final JwtProvider jwtProvider;
 
     @Override
-    public JwtResponse getJwtResponseIfSuccessfulLogin(JwtRequest jwtRequest) {
+    public JwtResponse getJwtIfSuccessfulLogin(JwtRequest jwtRequest) {
         authentication(jwtRequest);
 
-        return getJwtResponse(jwtRequest);
+        String username = jwtRequest.getUsername();
+
+        return getJwtResponse(username);
     }
 
     private void authentication(JwtRequest jwtRequest) {
@@ -33,14 +37,42 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             authenticationProvider.authenticate(authenticationToken);
         } catch (AuthenticationException authenticationException) {
 
-            throw new BadCredentialsException("Incorrect login or password");
+            throw new BadCredentialsException("Incorrect username or password");
         }
     }
 
-    private JwtResponse getJwtResponse(JwtRequest jwtRequest) {
-        String accessToken = jwtProvider.generateAccessToken(jwtRequest.getUsername());
-        String refreshToken = jwtProvider.generateRefreshToken(jwtRequest.getUsername());
+    private JwtResponse getJwtResponse(String username) {
+        String accessToken = jwtProvider.generateAccessToken(username);
+        String refreshToken = jwtProvider.generateRefreshToken(username);
 
         return new JwtResponse(accessToken, refreshToken);
+    }
+
+    @Override
+    public JwtResponse getNewAccessTokenUsingRefreshToken(RefreshJwtRequest refreshJwtRequest) {
+        String username = getUsernameIfRefreshTokenIsValid(refreshJwtRequest);
+
+        String accessToken = jwtProvider.generateAccessToken(username);
+
+        return new JwtResponse(accessToken, "");
+    }
+
+    @Override
+    public JwtResponse getNewJwtUsingRefreshToken(RefreshJwtRequest refreshJwtRequest) {
+        String username = getUsernameIfRefreshTokenIsValid(refreshJwtRequest);
+
+        return getJwtResponse(username);
+    }
+
+    private String getUsernameIfRefreshTokenIsValid(RefreshJwtRequest refreshJwtRequest) {
+        String refreshToken = refreshJwtRequest.getRefreshToken();
+
+        if (jwtProvider.isRefreshTokenValid(refreshToken)) {
+            Claims claims = jwtProvider.getRefreshTokenClaims(refreshToken);
+
+            return claims.getSubject();
+        }
+
+        throw new JwtException("Invalid refresh token");
     }
 }
