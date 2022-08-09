@@ -36,7 +36,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
             authenticationProvider.authenticate(authenticationToken);
         } catch (AuthenticationException authenticationException) {
-
+            
             throw new BadCredentialsException("Incorrect username or password");
         }
     }

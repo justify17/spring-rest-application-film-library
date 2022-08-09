@@ -5,7 +5,6 @@ import com.studying.springrestapplication.dto.JwtResponse;
 import com.studying.springrestapplication.dto.RefreshJwtRequest;
 import com.studying.springrestapplication.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,23 +18,23 @@ public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
     @PostMapping
-    public ResponseEntity<?> authentication(@RequestBody JwtRequest jwtRequest) {
+    public ResponseEntity<JwtResponse> authentication(@RequestBody JwtRequest jwtRequest) {
         JwtResponse jwtResponse = authenticationService.getJwtIfSuccessfulLogin(jwtRequest);
 
-        return new ResponseEntity<>(jwtResponse, HttpStatus.OK);
+        return ResponseEntity.ok(jwtResponse);
     }
 
     @PostMapping("/newAccessToken")
-    public ResponseEntity<?> getNewAccessToken(@RequestBody RefreshJwtRequest refreshJwtRequest) {
+    public ResponseEntity<JwtResponse> getNewAccessToken(@RequestBody RefreshJwtRequest refreshJwtRequest) {
         JwtResponse jwtResponse = authenticationService.getNewAccessTokenUsingRefreshToken(refreshJwtRequest);
 
-        return new ResponseEntity<>(jwtResponse, HttpStatus.OK);
+        return ResponseEntity.ok(jwtResponse);
     }
 
     @PostMapping("/newJwt")
-    public ResponseEntity<?> getNewJwt(@RequestBody RefreshJwtRequest refreshJwtRequest) {
+    public ResponseEntity<JwtResponse> getNewJwt(@RequestBody RefreshJwtRequest refreshJwtRequest) {
         JwtResponse jwtResponse = authenticationService.getNewJwtUsingRefreshToken(refreshJwtRequest);
 
-        return new ResponseEntity<>(jwtResponse, HttpStatus.OK);
+        return ResponseEntity.ok(jwtResponse);
     }
 }

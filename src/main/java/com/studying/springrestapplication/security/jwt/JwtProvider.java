@@ -13,7 +13,6 @@ import java.util.Date;
 
 @Component
 public class JwtProvider {
-
     public static final long ACCESS_JWT_MILLIS_LIFETIME = 1_800_000;
     public static final long REFRESH_JWT_MILLIS_LIFETIME = 864_000_000;
 
