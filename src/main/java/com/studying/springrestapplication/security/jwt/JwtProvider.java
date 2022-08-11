@@ -2,19 +2,22 @@ package com.studying.springrestapplication.security.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
 import java.util.Date;
 
+@Slf4j
 @Component
 public class JwtProvider {
     public static final long ACCESS_JWT_MILLIS_LIFETIME = 1_800_000;
-    public static final long REFRESH_JWT_MILLIS_LIFETIME = 864_000_000;
+    public static final long REFRESH_JWT_MILLIS_LIFETIME = 86_400_000;
 
     private final Key accessSecretKey;
     private final Key refreshSecretKey;
@@ -67,7 +70,8 @@ public class JwtProvider {
             getJwt(secretKey, token);
 
             return true;
-        } catch (Exception e) {
+        } catch (JwtException e) {
+            log.error("Authentication error. Token is not valid");
 
             return false;
         }

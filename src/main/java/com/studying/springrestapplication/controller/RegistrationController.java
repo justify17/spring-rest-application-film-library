@@ -3,12 +3,8 @@ package com.studying.springrestapplication.controller;
 import com.studying.springrestapplication.dto.UserDto;
 import com.studying.springrestapplication.service.RegistrationService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,9 +13,10 @@ public class RegistrationController {
     private final RegistrationService registrationService;
 
     @PostMapping
-    public ResponseEntity<?> registration(@RequestBody UserDto userDto) {
+    @ResponseBody
+    public ResponseEntity<Void> registration(@RequestBody UserDto userDto) {
         registrationService.registerUser(userDto);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok().build();
     }
 }
