@@ -1,11 +1,13 @@
 package com.studying.springrestapplication.service.impl;
 
 import com.studying.springrestapplication.dto.FilmDto;
+import com.studying.springrestapplication.exception.EntityByIdNotFoundException;
 import com.studying.springrestapplication.mapper.FilmMapper;
 import com.studying.springrestapplication.model.entity.*;
 import com.studying.springrestapplication.model.repository.FilmRepository;
 import com.studying.springrestapplication.service.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
@@ -34,9 +36,9 @@ public class FilmServiceImpl implements FilmService {
 
     @Override
     public FilmDto getFilmById(Long id) {
-        Film film = filmRepository.findById(id).orElse(null);
+        Film film = filmRepository.findById(id).orElseThrow(() -> new EntityByIdNotFoundException(Film.class, id));
 
-        return film != null ? filmMapper.filmToFilmDto(film) : null;
+        return filmMapper.filmToFilmDto(film);
     }
 
     @Override
@@ -69,6 +71,10 @@ public class FilmServiceImpl implements FilmService {
 
     @Override
     public void deleteFilmById(Long id) {
-        filmRepository.deleteById(id);
+        try {
+            filmRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException exception) {
+            throw new EntityByIdNotFoundException(Film.class, id);
+        }
     }
 }

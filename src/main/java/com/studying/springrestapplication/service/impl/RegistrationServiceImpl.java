@@ -32,4 +32,12 @@ public class RegistrationServiceImpl implements RegistrationService {
 
         userRepository.save(user);
     }
+
+    public boolean isUserExisting(UserDto userDto) {
+        String username = userDto.getUsername();
+
+        User user = userRepository.findByUsername(username);
+
+        return user != null;
+    }
 }

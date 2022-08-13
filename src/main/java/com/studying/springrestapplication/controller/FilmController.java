@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -25,18 +26,18 @@ public class FilmController {
     public ResponseEntity<FilmDto> getFilm(@PathVariable Long id) {
         FilmDto film = filmService.getFilmById(id);
 
-        return film != null ? ResponseEntity.ok(film) : ResponseEntity.notFound().build();
+        return ResponseEntity.ok(film);
     }
 
     @PostMapping
-    public ResponseEntity<Void> createFilm(@RequestBody FilmDto filmDto) {
+    public ResponseEntity<Void> createFilm(@Valid @RequestBody FilmDto filmDto) {
         filmService.saveFilm(filmDto);
 
         return ResponseEntity.ok().build();
     }
 
     @PutMapping
-    public ResponseEntity<Void> updateFilm(@RequestBody FilmDto filmDto) {
+    public ResponseEntity<Void> updateFilm(@Valid @RequestBody FilmDto filmDto) {
         filmService.updateFilm(filmDto);
 
         return ResponseEntity.ok().build();

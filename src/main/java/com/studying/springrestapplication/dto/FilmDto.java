@@ -7,6 +7,10 @@ import com.studying.springrestapplication.model.enumeration.Language;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -17,18 +21,32 @@ import java.util.Set;
 @NoArgsConstructor
 public class FilmDto {
     private Long id;
+
+    @NotBlank(message = "The field 'title' must not be empty")
     private String title;
     private Set<Genre> genres = new HashSet<>();
+
+    @Valid
     private Set<DirectorDto> directors = new HashSet<>();
+
+    @Valid
     private Set<ScreenwriterDto> screenwriters = new HashSet<>();
+
+    @Valid
     private Set<ProducerDto> producers = new HashSet<>();
-    private Map<String, ActorDto> characters = new HashMap<>();
+
+    @Valid
+    private Map<@NotBlank(message = "Character name must not be empty") String, ActorDto> characters = new HashMap<>();
 
     @JsonFormat(pattern = "dd.MM.yyyy")
+    @NotNull(message = "The field 'releaseDate' is required")
     private LocalDate releaseDate;
 
+    @Positive(message = "The field 'runningTime' is required and must be positive")
     private int runningTime;
     private Set<Country> countries = new HashSet<>();
+
+    @NotNull(message = "The field 'language' is required")
     private Language language;
 
     public FilmDto(String title, LocalDate releaseDate, int runningTime, Language language) {
