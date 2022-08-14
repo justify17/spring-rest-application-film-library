@@ -17,4 +17,10 @@ public enum Genre implements DefaultEnum<String> {
 
         return name;
     }
+
+    @Override
+    public String toString() {
+
+        return name;
+    }
 }

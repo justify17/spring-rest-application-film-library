@@ -16,4 +16,10 @@ public enum Role implements DefaultEnum<String> {
 
         return name;
     }
+
+    @Override
+    public String toString() {
+
+        return name;
+    }
 }
