@@ -84,8 +84,7 @@ class AuthenticationServiceImplTest {
 
         when(jwtProvider.isRefreshTokenValid(TEST_REFRESH_TOKEN)).thenReturn(false);
 
-        assertThrows(JwtException.class,
-                () -> authenticationService.getNewAccessTokenUsingRefreshToken(refreshJwtRequest));
+        assertThrows(JwtException.class, () -> authenticationService.getNewAccessTokenUsingRefreshToken(refreshJwtRequest));
     }
 
     @Test
@@ -113,7 +112,6 @@ class AuthenticationServiceImplTest {
 
         when(jwtProvider.isRefreshTokenValid(TEST_REFRESH_TOKEN)).thenReturn(false);
 
-        assertThrows(JwtException.class,
-                () -> authenticationService.getNewJwtUsingRefreshToken(refreshJwtRequest));
+        assertThrows(JwtException.class, () -> authenticationService.getNewJwtUsingRefreshToken(refreshJwtRequest));
     }
 }

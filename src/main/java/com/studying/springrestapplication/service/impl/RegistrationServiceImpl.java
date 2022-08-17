@@ -33,6 +33,7 @@ public class RegistrationServiceImpl implements RegistrationService {
         userRepository.save(user);
     }
 
+    @Override
     public boolean isUserExisting(UserDto userDto) {
         String username = userDto.getUsername();
 
